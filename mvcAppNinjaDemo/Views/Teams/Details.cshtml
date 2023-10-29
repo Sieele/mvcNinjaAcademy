@@ -1,0 +1,68 @@
+﻿@model mvcAppNinjaDemo.Models.Team
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+        <h4>Mission Details</h4>
+        @if (Model.Mission != null)
+        {
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Rank
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Mission.Rank
+                </dd>
+                <dt class="col-sm-2">
+                    Local
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Mission.Local
+                </dd>
+            </dl>
+        }
+        else
+        {
+            <p>This team has no assigned mission.</p>
+        }
+    </dl>
+</div>
+
+<h4>Team Members</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Jutsu</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ninja in Model.Ninjas)
+        {
+            <tr>
+                <td>@ninja.FirstName @ninja.LastName</td>
+                <td>@ninja.Jutsu</td>
+                <td>@(DateTime.Now.Year - ninja.DateOfBirth.Year)</td> <!-- This calculates the age -->
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.TeamId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,95 @@
+﻿@model mvcAppNinjaDemo.Models.Ninja
+
+@{
+    ViewData["Title"] = "Details";
+
+    var today = DateTime.Today;
+    var age = today.Year - Model.DateOfBirth.Year;
+    if (Model.DateOfBirth.Date > today.AddYears(-age))
+    {
+        age--;
+    }
+}
+
+<h1>Details</h1>
+
+
+<div>
+    <h4>Ninja</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            Imagem
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.NinjaImagePath" alt="Imagem do Ninja" width="200" /> <!-- width="200" é opcional, ajuste conforme necessário -->
+        </dd>
+        <dt class="col-sm-2">
+            Clã
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+        <dt class="col-sm-2">
+            Idade
+        </dt>
+        <dd class="col-sm-10">
+            @age anos
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jutsu)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jutsu)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Information)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Information)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Team.TeamName)
+        </dd>
+        <dt class="col-sm-2">
+            Status
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.IsAlive.HasValue)
+            {
+                if (Model.IsAlive.Value)
+                {
+                    <span>Vivo</span>
+                }
+                else
+                {
+                    <span>Morto</span>
+                }
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.NinjaId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
