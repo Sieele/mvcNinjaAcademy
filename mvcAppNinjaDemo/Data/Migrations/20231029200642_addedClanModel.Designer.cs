@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mvcAppNinjaDemo.Data;
 
@@ -11,9 +12,10 @@ using mvcAppNinjaDemo.Data;
 namespace mvcAppNinjaDemo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231029200642_addedClanModel")]
+    partial class addedClanModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,9 +261,6 @@ namespace mvcAppNinjaDemo.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"), 1L, 1);
 
-                    b.Property<int?>("ClanId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImageName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -274,8 +273,6 @@ namespace mvcAppNinjaDemo.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ImageId");
-
-                    b.HasIndex("ClanId");
 
                     b.ToTable("Images");
                 });
@@ -316,9 +313,6 @@ namespace mvcAppNinjaDemo.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NinjaId"), 1L, 1);
 
-                    b.Property<int?>("ClanId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -349,8 +343,6 @@ namespace mvcAppNinjaDemo.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("NinjaId");
-
-                    b.HasIndex("ClanId");
 
                     b.HasIndex("ImageId");
 
@@ -427,15 +419,6 @@ namespace mvcAppNinjaDemo.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("mvcAppNinjaDemo.Models.Image", b =>
-                {
-                    b.HasOne("mvcAppNinjaDemo.Models.Clan", "Clan")
-                        .WithMany("Images")
-                        .HasForeignKey("ClanId");
-
-                    b.Navigation("Clan");
-                });
-
             modelBuilder.Entity("mvcAppNinjaDemo.Models.Mission", b =>
                 {
                     b.HasOne("mvcAppNinjaDemo.Models.Team", "Team")
@@ -447,10 +430,6 @@ namespace mvcAppNinjaDemo.Data.Migrations
 
             modelBuilder.Entity("mvcAppNinjaDemo.Models.Ninja", b =>
                 {
-                    b.HasOne("mvcAppNinjaDemo.Models.Clan", "Clan")
-                        .WithMany("Ninjas")
-                        .HasForeignKey("ClanId");
-
                     b.HasOne("mvcAppNinjaDemo.Models.Image", "Image")
                         .WithMany("Ninjas")
                         .HasForeignKey("ImageId");
@@ -459,18 +438,9 @@ namespace mvcAppNinjaDemo.Data.Migrations
                         .WithMany("Ninjas")
                         .HasForeignKey("TeamId");
 
-                    b.Navigation("Clan");
-
                     b.Navigation("Image");
 
                     b.Navigation("Team");
-                });
-
-            modelBuilder.Entity("mvcAppNinjaDemo.Models.Clan", b =>
-                {
-                    b.Navigation("Images");
-
-                    b.Navigation("Ninjas");
                 });
 
             modelBuilder.Entity("mvcAppNinjaDemo.Models.Image", b =>

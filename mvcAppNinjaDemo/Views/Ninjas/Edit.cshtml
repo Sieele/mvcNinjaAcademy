@@ -19,6 +19,13 @@
                 <img src="@Model.NinjaImagePath" alt="Imagem do Ninja" width="200" /> <!-- width="200" é opcional, ajuste conforme necessário -->
             </div>
 
+
+            <div class="form-group">
+                <label asp-for="ClanId" class="control-label"></label>
+                @Html.DropDownList("ClanId", null, "Selecione um Clan", new { @class = "form-control" })
+                <span asp-validation-for="ClanId" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />

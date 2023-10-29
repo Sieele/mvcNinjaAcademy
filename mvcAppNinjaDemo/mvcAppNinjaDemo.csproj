@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Uploads\Clans\" />
     <Folder Include="wwwroot\Uploads\Ninjas\" />
   </ItemGroup>
 

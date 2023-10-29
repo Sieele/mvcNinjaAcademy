@@ -40,6 +40,10 @@ namespace mvcAppNinjaDemo.Models
         public int? ImageId { get; set; }
         public virtual Image? Image { get; set; }
 
+        //---CLAN---//
+        public int? ClanId { get; set; }
+        public virtual Clan? Clan { get; set; }
+
 
         //-------------------DETAILS-------------------//
 
@@ -106,9 +110,37 @@ namespace mvcAppNinjaDemo.Models
         public string ImageName { get; set; }
         public string ImagePath { get; set; }
 
+
+        //-------------------RELATIONSHIP-------------------//
+        //---NINJA---//
         public int? NinjaId { get; set; }
+        public virtual ICollection<Ninja>? Ninjas { get; set; }
+
+        //---CLAN---//
+        public int? ClanId { get; set; }
+        public virtual Clan? Clan { get; set; }
+    }
+
+
+    //-------------------CLAN-------------------//
+    // ClanId, ClanName, ClanInfo
+
+    public class Clan
+    {
+        public int ClanId { get; set; }
+
+        [Required(ErrorMessage = "The Cla Name is Required"), Display(Name ="Cla Name")]
+        public string ClanName { get; set; }
+        public string? ClanImagePath { get; set; }
+        public string? Leader { get; set;}
+
+        [Required(ErrorMessage = "Cla Informations is Necessary"), Display(Name ="Cla Description")]
+        public string ClanInfo { get; set; }
+
+        //-------------------RELATIONSHIP-------------------//
 
         public virtual ICollection<Ninja>? Ninjas { get; set; }
+        public virtual ICollection<Image>? Images { get; set; }
     }
 
 

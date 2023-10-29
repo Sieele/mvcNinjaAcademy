@@ -55,6 +55,7 @@ namespace mvcAppNinjaDemo.Controllers
         {
             ViewData["ImageId"] = new SelectList(_context.Images, "ImageId", "ImageId");
             ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName");
+            ViewData["ClanId"] = new SelectList(_context.Clans, "ClanId", "ClanName");
             return View();
         }
 
@@ -63,7 +64,7 @@ namespace mvcAppNinjaDemo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NinjaId,FirstName,LastName,DateOfBirth,Jutsu,NinjaImagePath,IsAlive,Information,TeamId,ImageId")] Ninja ninja, IFormFile? NinjaImage)
+        public async Task<IActionResult> Create([Bind("NinjaId,FirstName,LastName,DateOfBirth,Jutsu,NinjaImagePath,IsAlive,Information,TeamId,ImageId,ClanId")] Ninja ninja, IFormFile? NinjaImage)
         {
 
             ninja.IsAlive = true; // Todos os ninjas são criados vivos
@@ -124,6 +125,7 @@ namespace mvcAppNinjaDemo.Controllers
             }
             ViewData["ImageId"] = new SelectList(_context.Images, "ImageId", "ImageId", ninja.ImageId);
             ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", ninja.TeamId);
+            ViewData["ClanId"] = new SelectList(_context.Clans, "ClanId", "ClanName", ninja.ClanId);
             return View(ninja);
         }
 
@@ -152,6 +154,7 @@ namespace mvcAppNinjaDemo.Controllers
 
             ViewData["ImageId"] = new SelectList(_context.Images, "ImageId", "ImageId", ninja.ImageId);
             ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", ninja.TeamId);
+            ViewData["ClanId"] = new SelectList(_context.Clans, "ClanId", "ClanName", ninja.ClanId);
             return View(ninja);
         }
 
@@ -160,7 +163,7 @@ namespace mvcAppNinjaDemo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NinjaId,FirstName,LastName,DateOfBirth,Jutsu,NinjaImagePath,IsAlive,Information,TeamId,ImageId")] Ninja ninja, IFormFile? NinjaImage)
+        public async Task<IActionResult> Edit(int id, [Bind("NinjaId,FirstName,LastName,DateOfBirth,Jutsu,NinjaImagePath,IsAlive,Information,TeamId,ImageId,ClanId")] Ninja ninja, IFormFile? NinjaImage)
         {
             if (id != ninja.NinjaId)
             {
@@ -210,6 +213,7 @@ namespace mvcAppNinjaDemo.Controllers
             }
             ViewData["ImageId"] = new SelectList(_context.Images, "ImageId", "ImageId", ninja.ImageId);
             ViewData["TeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", ninja.TeamId);
+            ViewData["ClanId"] = new SelectList(_context.Clans, "ClanId", "ClanName", ninja.ClanId);
             return View(ninja);
         }
 
